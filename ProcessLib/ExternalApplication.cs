@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Text;
 
-namespace ProcessLib;
+namespace EinsTools.Utilities.ProcessLib;
 
 public record ExternalApplication(
     string FileName,
@@ -11,6 +11,20 @@ public record ExternalApplication(
     Action<string>? ErrorDataReceived = null,
     Func<int, bool>? IsSuccess = null
 ) {
+    /// <summary>
+    /// Sets (and overrides!) the arguments for the external application.
+    /// </summary>
+    /// <param name="arguments">The arguments to use</param>
+    public ExternalApplication ReplaceArguments(params string[] arguments) =>
+        this with { Arguments = arguments };
+    
+    /// <summary>
+    /// Adds arguments to the external application.
+    /// </summary>
+    /// <param name="arguments">The arguments to add</param>
+    public ExternalApplication AddArguments(params string[] arguments) =>
+        this with { Arguments = Arguments.Concat(arguments).ToArray() };
+    
     /// <summary>
     /// Sets the working directory for the external application.
     /// </summary>
@@ -98,8 +112,8 @@ public record ExternalApplication(
         Action<string>? outputDataReceived,
         Action<string>? errorDataReceived,
         Func<int, bool>? isSuccess = null
-    ) {
-        return new ExternalApplication(
+    ) =>
+        new(
             fileName,
             arguments,
             null,
@@ -107,7 +121,21 @@ public record ExternalApplication(
             errorDataReceived,
             isSuccess
         );
-    }
+
+    public static ExternalApplication Create(
+        string fileName,
+        Action<string>? outputDataReceived,
+        Action<string>? errorDataReceived,
+        Func<int, bool>? isSuccess = null
+    ) =>
+        new(
+            fileName,
+            Array.Empty<string>(),
+            null,
+            outputDataReceived,
+            errorDataReceived,
+            isSuccess
+        );
     
     public static ExternalApplication Create(
         string fileName,

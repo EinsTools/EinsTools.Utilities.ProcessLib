@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Text;
-using ProcessLib;
+using EinsTools.Utilities.ProcessLib;
 
 var sbOut = new StringBuilder();
 var sbErr = new StringBuilder();

@@ -1,4 +1,4 @@
-namespace ProcessLib;
+namespace EinsTools.Utilities.ProcessLib;
 
 public class ExternalApplicationException : Exception {
     public int ExitCode { get; }

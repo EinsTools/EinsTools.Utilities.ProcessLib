@@ -76,6 +76,25 @@ var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
     .ThrowOnError(n => n < 5);
 ```
 
+### AddArguments
+AddArguments adds command line arguments to the application.
+
+```csharp
+var app = ExternalApplication.Create("MyApp.exe")
+    .AddArguments("-d", "OptionValue");
+```
+
+### ReplaceArguments
+ReplaceArguments replaces the command line arguments of the application.
+
+```csharp
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+    .AddArguments("-c", "OptionValue1")
+    .ReplaceArguments("-d", "OptionValue");
+```
+
+In this example, the command line arguments will be "-d", "OptionValue". All arguments added before are replaced.
+
 ### Execute
 Execute runs the application and returns a Task<int> that represents the exit code of the application.
 
@@ -100,7 +119,7 @@ Console.WriteLine($"Stderr: {result.Stderr}");
 ```csharp
 using System;
 using System.Threading.Tasks;
-using ProcessLib;
+using EinsTools.Utilities.ProcessLib;
 
 var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
     .In("/var/myapp")

@@ -4,6 +4,27 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Version>0.0.1</Version>
+    <Author>EinsTools</Author>
+    <Company>EinsTools</Company>
+    <PackageTags>Process;Library;External Process;Execute</PackageTags>
+    <PackageDescription>Library for executing external processes.</PackageDescription>
+    <PackageId>EinsProcess.Utilities.ProcessLib</PackageId>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/EinsTools/processlib</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/EinsTools/processlib</PackageProjectUrl>
+    <Copyright>(c) 2023 by EinsTools</Copyright>
+    <RootNamespace>EinsTools.Utilities.ProcessLib</RootNamespace>
   </PropertyGroup>
-
+  <ItemGroup>
+    <None Include="../README.md" Pack="true" PackagePath="" />
+    <None Include="../LICENSE" Pack="true" PackagePath="" />
+    
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+  </ItemGroup>
 </Project>

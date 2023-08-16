@@ -25,11 +25,11 @@ jobs:
     - name: Clean output directory
       run: rm -rf out/  
     - name: Build
-      run: dotnet pack --no-restore -o out/ProcessLib
+      run: dotnet pack --no-restore -o out/ProcessLib -c Release ProcessLib/ProcessLib.csproj
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Add GitHub NuGet package source
-      run: dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/einstools/index.json"
+      run: dotnet nuget add source --username ${{ secrets.USERNAME }} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/einstools/index.json"
     - name: Publish
       run: dotnet nuget push "out/ProcessLib/*.nupkg" --source github
         

@@ -43,6 +43,58 @@ var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue);
 var app = ExternalApplication.Create("MyApp.exe", new string[] { "-c", "OptionValue" }, workingDirectory: "C:\\MyApp");
 ```
 
+### In
+In sets the working directory of the application.
+
+```csharp
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+    .In("C:\\MyApp");
+```
+
+### OutputTo
+OutputTo sets the action that the application's standard output will be written to.
+
+```csharp
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+    .OutputTo(Console.Out);
+```
+
+### ErrorTo
+ErrorTo sets the action that the application's standard error will be written to.
+
+```csharp
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+    .ErrorTo(Console.Error);
+```
+
+### ThrowOnError
+ThrowOnError sets a function that will be called with the exit code of the application. If the function returns true,
+the execution of the application will succeed. If the function returns false, an exception will be thrown.
+
+```csharp
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+    .ThrowOnError(n => n < 5);
+```
+
+### Execute
+Execute runs the application and returns a Task<int> that represents the exit code of the application.
+
+```csharp
+var exitCode = await app.Execute();
+```
+
+### ExecuteWithResult
+
+ExecuteWithResult runs the application and returns a Task<ExternalApplicationResult> that represents the result of 
+the application, including the exit code and both stdout and stderr output.
+
+```csharp
+var result = await app.ExecuteWithResult();
+Console.WriteLine($"Exit code: {result.ExitCode}");
+Console.WriteLine($"Stdout: {result.Stdout}");
+Console.WriteLine($"Stderr: {result.Stderr}");
+```
+
 ## Sample
 
 ```csharp

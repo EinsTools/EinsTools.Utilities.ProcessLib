@@ -9,7 +9,7 @@
     <Company>EinsTools</Company>
     <PackageTags>Process;Library;External Process;Execute</PackageTags>
     <PackageDescription>Library for executing external processes.</PackageDescription>
-    <PackageId>EinsProcess.Utilities.ProcessLib</PackageId>
+    <PackageId>EinsTools.Utilities.ProcessLib</PackageId>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>

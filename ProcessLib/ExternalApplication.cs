@@ -95,15 +95,14 @@ public record ExternalApplication(
     public static ExternalApplication Create(
         string fileName,
         string[] arguments,
-        string? workingDirectory,
-        Action<string>? outputDataReceived = null,
-        Action<string>? errorDataReceived = null,
+        Action<string>? outputDataReceived,
+        Action<string>? errorDataReceived,
         Func<int, bool>? isSuccess = null
     ) {
         return new ExternalApplication(
             fileName,
             arguments,
-            workingDirectory,
+            null,
             outputDataReceived,
             errorDataReceived,
             isSuccess
@@ -112,7 +111,7 @@ public record ExternalApplication(
     
     public static ExternalApplication Create(
         string fileName,
-        params string[] arguments) => Create(fileName, arguments, null);
+        params string[] arguments) => Create(fileName, arguments, null, null);
 }
 
 public record ApplicationResult(int ExitCode, string StdOut, string StdErr);

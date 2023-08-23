@@ -1,0 +1,5 @@
+Version 0.0.3
+    - Added build process
+    - Added the methods WithWindowStyle, ShowWindow, HideWindow, MaximizeWindow and MinimizeWindow
+    - Added ThrowOnError with range argument
+    

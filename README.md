@@ -76,6 +76,16 @@ var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
     .ThrowOnError(n => n < 5);
 ```
 
+There is an overload of ThrowOnError that takes a range value. If the exit code of the application is within the range,
+the execution of the application will succeed. If the exit code is outside the range, an exception will be thrown.
+
+```csharp
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+    .ThrowOnError(0..5);
+```
+
+Please note that the range is inclusive. In the example the exit code must be >= 0 and <= 5.
+
 ### AddArguments
 AddArguments adds command line arguments to the application.
 
@@ -118,6 +128,8 @@ Console.WriteLine($"Stderr: {result.Stderr}");
 
 WithWindowStyle sets the window style of the application. Possible values for the ProcessWindowStyle enum are
 ProcessWindowStyle.Hidden, ProcessWindowStyle.Maximized, ProcessWindowStyle.Minimized and ProcessWindowStyle.Normal.
+
+The default value is ProcessWindowStyle.Hidden.
 
 ```csharp
 var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)

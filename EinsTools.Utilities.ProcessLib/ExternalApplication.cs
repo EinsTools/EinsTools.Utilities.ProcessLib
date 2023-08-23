@@ -56,8 +56,16 @@ public record ExternalApplication(
     /// <param name="isSuccess">Function to determine if the exit code is a success. This will
     /// usually be n => n == 0.</param>
     /// <returns></returns>
-    public ExternalApplication ThrowOnError(Func<int, bool>? isSuccess) =>
+    public ExternalApplication ThrowOnError(Func<int, bool>? isSuccess = null) =>
         this with { IsSuccess = isSuccess ?? (exitCode => exitCode == 0) };
+    
+    public ExternalApplication ThrowOnError(Range range) =>
+        this with { IsSuccess = exitCode =>
+            {
+                var (offset, length) = range.GetOffsetAndLength(int.MaxValue);
+                return exitCode >= offset && exitCode <= offset + length;
+            }
+        };
 
     public ExternalApplication WithWindowStyle(ProcessWindowStyle windowStyle) =>
         this with { WindowStyle = windowStyle };

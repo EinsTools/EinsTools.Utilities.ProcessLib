@@ -114,6 +114,52 @@ Console.WriteLine($"Stdout: {result.Stdout}");
 Console.WriteLine($"Stderr: {result.Stderr}");
 ```
 
+### WithWindowStyle
+
+WithWindowStyle sets the window style of the application. Possible values for the ProcessWindowStyle enum are
+ProcessWindowStyle.Hidden, ProcessWindowStyle.Maximized, ProcessWindowStyle.Minimized and ProcessWindowStyle.Normal.
+
+```csharp
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+    .WithWindowStyle(ProcessWindowStyle.Hidden);
+```
+
+### ShowWindow
+
+ShowWindow sets the window style of the application to ProcessWindowStyle.Normal.
+
+```csharp
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+    .ShowWindow();
+```
+
+### HideWindow
+
+HideWindow sets the window style of the application to ProcessWindowStyle.Hidden.
+
+```csharp
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+    .HideWindow();
+```
+
+### MaximizeWindow
+
+MaximizeWindow sets the window style of the application to ProcessWindowStyle.Maximized.
+
+```csharp
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+    .MaximizeWindow();
+```
+
+### MinimizeWindow
+
+MinimizeWindow sets the window style of the application to ProcessWindowStyle.Minimized.
+
+```csharp
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+    .MinimizeWindow();
+```
+
 ## Sample
 
 ```csharp

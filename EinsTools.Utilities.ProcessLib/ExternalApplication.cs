@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Text;
 
 namespace EinsTools.Utilities.ProcessLib;
 
@@ -9,7 +8,8 @@ public record ExternalApplication(
     string? WorkingDirectory = null,
     Action<string>? OutputDataReceived = null,
     Action<string>? ErrorDataReceived = null,
-    Func<int, bool>? IsSuccess = null
+    Func<int, bool>? IsSuccess = null,
+    ProcessWindowStyle WindowStyle = ProcessWindowStyle.Hidden
 ) {
     /// <summary>
     /// Sets (and overrides!) the arguments for the external application.
@@ -59,6 +59,21 @@ public record ExternalApplication(
     public ExternalApplication ThrowOnError(Func<int, bool>? isSuccess) =>
         this with { IsSuccess = isSuccess ?? (exitCode => exitCode == 0) };
 
+    public ExternalApplication WithWindowStyle(ProcessWindowStyle windowStyle) =>
+        this with { WindowStyle = windowStyle };
+    
+    public ExternalApplication ShowWindow() =>
+        this with { WindowStyle = ProcessWindowStyle.Normal };
+    
+    public ExternalApplication HideWindow() =>
+        this with { WindowStyle = ProcessWindowStyle.Hidden };
+    
+    public ExternalApplication MinimizeWindow() =>
+        this with { WindowStyle = ProcessWindowStyle.Minimized };
+    
+    public ExternalApplication MaximizeWindow() =>
+        this with { WindowStyle = ProcessWindowStyle.Maximized };
+    
     /// <summary>
     /// Executes the external application.
     /// </summary>
@@ -71,7 +86,8 @@ public record ExternalApplication(
             RedirectStandardOutput = OutputDataReceived is not null,
             RedirectStandardError = ErrorDataReceived is not null,
             UseShellExecute = false,
-            CreateNoWindow = true
+            CreateNoWindow = true,
+            WindowStyle = WindowStyle
         };
 
         foreach (var arg in Arguments)
@@ -140,25 +156,4 @@ public record ExternalApplication(
     public static ExternalApplication Create(
         string fileName,
         params string[] arguments) => Create(fileName, arguments, null, null);
-}
-
-public record ApplicationResult(int ExitCode, string StdOut, string StdErr);
-
-public static class ExternalApplicationExtensions {
-    public static async Task<ApplicationResult> ExecuteWithResult(this ExternalApplication app,
-        Func<int, bool>? isSuccess = null) {
-        var stdOut = new StringBuilder();
-        var stdErr = new StringBuilder();
-        var exitCode = await app
-            .OutputTo(s => {
-                stdOut.AppendLine(s);
-                app.OutputDataReceived?.Invoke(s);
-            })
-            .ErrorTo(s => {
-                stdErr.AppendLine(s);
-                app.ErrorDataReceived?.Invoke(s);
-            })
-            .Execute();
-        return new ApplicationResult(exitCode, stdOut.ToString(), stdErr.ToString());
-    }
 }

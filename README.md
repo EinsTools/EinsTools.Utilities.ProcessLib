@@ -10,7 +10,7 @@ a .Net application.
 You create a new instance of the ExternalApplication class, using the Create method.
 
 ```csharp
-var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue);
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue");
 ```
 
 In this case the application is created with the executable and two command line arguments. You can then use the 
@@ -36,7 +36,7 @@ There are two overloads of the Create method. The first takes the executable nam
 a params array of command line arguments. The second takes an array of strings of the command line arguments.
 
 ```csharp
-var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue);
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue");
 ```
 
 ```csharp
@@ -47,7 +47,7 @@ var app = ExternalApplication.Create("MyApp.exe", new string[] { "-c", "OptionVa
 In sets the working directory of the application.
 
 ```csharp
-var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
     .In("C:\\MyApp");
 ```
 
@@ -55,7 +55,7 @@ var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
 OutputTo sets the action that the application's standard output will be written to.
 
 ```csharp
-var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
     .OutputTo(Console.Out);
 ```
 
@@ -63,7 +63,7 @@ var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
 ErrorTo sets the action that the application's standard error will be written to.
 
 ```csharp
-var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
     .ErrorTo(Console.Error);
 ```
 
@@ -72,7 +72,7 @@ ThrowOnError sets a function that will be called with the exit code of the appli
 the execution of the application will succeed. If the function returns false, an exception will be thrown.
 
 ```csharp
-var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
     .ThrowOnError(n => n < 5);
 ```
 
@@ -80,7 +80,7 @@ There is an overload of ThrowOnError that takes a range value. If the exit code 
 the execution of the application will succeed. If the exit code is outside the range, an exception will be thrown.
 
 ```csharp
-var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
     .ThrowOnError(0..5);
 ```
 
@@ -98,7 +98,7 @@ var app = ExternalApplication.Create("MyApp.exe")
 ReplaceArguments replaces the command line arguments of the application.
 
 ```csharp
-var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
     .AddArguments("-c", "OptionValue1")
     .ReplaceArguments("-d", "OptionValue");
 ```
@@ -132,7 +132,7 @@ ProcessWindowStyle.Hidden, ProcessWindowStyle.Maximized, ProcessWindowStyle.Mini
 The default value is ProcessWindowStyle.Hidden.
 
 ```csharp
-var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
     .WithWindowStyle(ProcessWindowStyle.Hidden);
 ```
 
@@ -141,7 +141,7 @@ var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
 ShowWindow sets the window style of the application to ProcessWindowStyle.Normal.
 
 ```csharp
-var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
     .ShowWindow();
 ```
 
@@ -150,7 +150,7 @@ var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
 HideWindow sets the window style of the application to ProcessWindowStyle.Hidden.
 
 ```csharp
-var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
     .HideWindow();
 ```
 
@@ -159,7 +159,7 @@ var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
 MaximizeWindow sets the window style of the application to ProcessWindowStyle.Maximized.
 
 ```csharp
-var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
     .MaximizeWindow();
 ```
 
@@ -168,7 +168,7 @@ var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
 MinimizeWindow sets the window style of the application to ProcessWindowStyle.Minimized.
 
 ```csharp
-var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
     .MinimizeWindow();
 ```
 
@@ -179,7 +179,7 @@ using System;
 using System.Threading.Tasks;
 using EinsTools.Utilities.ProcessLib;
 
-var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue)
+var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
     .In("/var/myapp")
     .OutputTo(Console.Out)
     .ErrorTo(Console.Error)

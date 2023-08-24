@@ -56,7 +56,7 @@ OutputTo sets the action that the application's standard output will be written 
 
 ```csharp
 var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
-    .OutputTo(Console.Out);
+    .OutputTo(Console.WriteLine);
 ```
 
 ### ErrorTo
@@ -64,7 +64,7 @@ ErrorTo sets the action that the application's standard error will be written to
 
 ```csharp
 var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
-    .ErrorTo(Console.Error);
+    .ErrorTo(Console.Error.WriteLine);
 ```
 
 ### ThrowOnError
@@ -181,8 +181,8 @@ using EinsTools.Utilities.ProcessLib;
 
 var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
     .In("/var/myapp")
-    .OutputTo(Console.Out)
-    .ErrorTo(Console.Error)
+    .OutputTo(Console.WriteLine)
+    .ErrorTo(Console.Error.WriteLine)
     .ThrowOnError(n => n < 5);
     
 var exitCode = await app.Execute();

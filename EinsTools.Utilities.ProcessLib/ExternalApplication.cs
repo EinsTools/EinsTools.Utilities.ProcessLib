@@ -119,10 +119,10 @@ public record ExternalApplication(
                 ErrorDataReceived?.Invoke(e.Data);
         };
         process.Start();
-        process.BeginOutputReadLine();
-        process.BeginErrorReadLine();
-        await semaOut.WaitAsync();
-        await semaErr.WaitAsync();
+        if (OutputDataReceived is not null) process.BeginOutputReadLine();
+        if (ErrorDataReceived is not null) process.BeginErrorReadLine();
+        if (OutputDataReceived is not null) await semaOut.WaitAsync();
+        if (ErrorDataReceived is not null) await semaErr.WaitAsync();
         await process.WaitForExitAsync();
         var exitCode = process.ExitCode;
         if (IsSuccess is not null && !IsSuccess(exitCode))

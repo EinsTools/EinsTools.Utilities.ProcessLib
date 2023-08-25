@@ -172,6 +172,10 @@ var app = ExternalApplication.Create("MyApp.exe", "-c", "OptionValue")
     .MinimizeWindow();
 ```
 
+## Restrictions
+
+If you rediect stdout or stderr, the MaximizeWindow, MinimizeWindow and ShowWindow methods will not work.
+
 ## Sample
 
 ```csharp

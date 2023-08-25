@@ -93,9 +93,9 @@ public record ExternalApplication(
             WorkingDirectory = WorkingDirectory,
             RedirectStandardOutput = OutputDataReceived is not null,
             RedirectStandardError = ErrorDataReceived is not null,
-            UseShellExecute = false,
+            UseShellExecute = OutputDataReceived is null && ErrorDataReceived is null && WindowStyle != ProcessWindowStyle.Hidden,
             CreateNoWindow = true,
-            WindowStyle = WindowStyle
+            WindowStyle = this.WindowStyle
         };
 
         foreach (var arg in Arguments)

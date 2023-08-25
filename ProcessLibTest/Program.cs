@@ -1,10 +1,20 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Diagnostics;
 using System.Text;
 using EinsTools.Utilities.ProcessLib;
 
 var sbOut = new StringBuilder();
 var sbErr = new StringBuilder();
+
+
+
+var app7 = ExternalApplication.Create(@"notepad.exe", new string[] { "a.txt" },
+        workingDirectory: "C:\\tmp")
+    .WithWindowStyle(ProcessWindowStyle.Maximized);
+
+await app7.Execute();
+
 var app = ExternalApplication.Create("pwsh", "-noprofile", "-c", "echo 'Hello, World!'")
     .OutputTo(s => sbOut.AppendLine(s))
     .ErrorTo(s => sbErr.AppendLine(s));
